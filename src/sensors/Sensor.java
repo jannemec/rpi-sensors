@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author u935
  */
-abstract class Sensor {
+abstract public class Sensor {
     
     protected tools.Cache cache;
     protected String sensorName = "SENSOR";
