@@ -14,6 +14,7 @@ import sensors.BMP180;
 import sensors.AM2321;
 import sensors.TSL2561;
 import sensors.TCS3200;
+import sensors.HCSR04;
 import tools.MemCache;
 
 
@@ -29,6 +30,12 @@ public class Test {
 
     public static void main(String args[]) throws Exception {
         tools.MemCache mCache = new MemCache();
+        
+        HCSR04 hcsr04 = new HCSR04(mCache);
+        for(int i = 0; i < 2; i++) {
+            System.out.printf("Distance : %.2f m %n", (double) (hcsr04.getDistance()));
+            Thread.sleep(2000);
+        }
         
         TCS3200 tcs3200 = new TCS3200(mCache);
         tcs3200.setFrequency(1);

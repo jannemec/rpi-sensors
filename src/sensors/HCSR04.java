@@ -10,9 +10,6 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.RaspiPin;
-import com.pi4j.io.i2c.I2CBus;
-import com.pi4j.io.i2c.I2CDevice;
-import com.pi4j.io.i2c.I2CFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,7 +27,7 @@ public class HCSR04 extends Sensor {
     }
     
     public HCSR04(tools.Cache cache) {
-        this(cache, RaspiPin.GPIO_00, RaspiPin.GPIO_02);
+        this(cache, RaspiPin.GPIO_28, RaspiPin.GPIO_29);
     }
     
     @Override
@@ -41,11 +38,11 @@ public class HCSR04 extends Sensor {
                 // Create I2C bus
                 GpioController gpio = GpioFactory.getInstance();
 		GpioPinDigitalOutput sensorTriggerPin =  gpio.provisionDigitalOutputPin(this.getGPIOTrig()); // Trigger pin as OUTPUT
-		GpioPinDigitalInput sensorEchoPin = gpio.provisionDigitalInputPin(this.getGPIOEcho(),PinPullResistance.PULL_DOWN); // Echo pin as INPUT
+		GpioPinDigitalInput sensorEchoPin = gpio.provisionDigitalInputPin(this.getGPIOEcho(),PinPullResistance.PULL_UP); // Echo pin as INPUT
                 sensorTriggerPin.high(); // Make trigger pin HIGH
-                Thread.sleep((long) 0.01);// Delay for 10 microseconds
+                Thread.sleep((long) 1);// Delay for 10 microseconds
                 sensorTriggerPin.low(); //Make trigger pin LOW
-
+                
                 while(sensorEchoPin.isLow()){ //Wait until the ECHO pin gets HIGH
                 }
                 long startTime= System.nanoTime(); // Store the surrent time to calculate ECHO pin HIGH time.
@@ -53,7 +50,7 @@ public class HCSR04 extends Sensor {
                 }
                 long endTime= System.nanoTime(); // Store the echo pin HIGH end time to calculate ECHO pin HIGH time.
 
-                double distance = (((endTime-startTime)/1e3)/2) / 2.91; //Printing out the distance in cm 
+                double distance = ((((double) (endTime-startTime))/1000000000 * 343)/2);
                 gpio.shutdown();
                 gpio.unprovisionPin(sensorTriggerPin);
                 gpio.unprovisionPin(sensorEchoPin);
