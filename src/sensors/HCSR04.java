@@ -1,5 +1,5 @@
 /*
- * Light sensor module
+ * Distance sensor module
  */
 package sensors;
 
@@ -80,7 +80,7 @@ public class HCSR04 extends Sensor {
      * @return the GPIOTrig
      */
     public Pin getGPIOTrig() {
-        return GPIOTrig;
+        return this.GPIOTrig;
     }
 
     /**
@@ -94,7 +94,7 @@ public class HCSR04 extends Sensor {
      * @return the GPIOEcho
      */
     public Pin getGPIOEcho() {
-        return GPIOEcho;
+        return this.GPIOEcho;
     }
 
     /**

@@ -15,6 +15,7 @@ import sensors.AM2321;
 import sensors.TSL2561;
 import sensors.TCS3200;
 import sensors.HCSR04;
+import sensors.RainSBX;
 import tools.MemCache;
 
 
@@ -29,6 +30,17 @@ import tools.MemCache;
 public class Test {
 
     public static void main(String args[]) throws Exception {
+        tools.MemCache mCache = new MemCache();
+        
+        RainSBX rainSBX = new RainSBX(mCache);
+        for(int i = 0; i < 2; i++) {
+            System.out.printf("Prší : %s %n", rainSBX.isRain() ? "ANO" : "NE");
+            Thread.sleep(2000);
+        }
+    
+    }
+    
+    public static void removed() throws Exception {
         tools.MemCache mCache = new MemCache();
         
         HCSR04 hcsr04 = new HCSR04(mCache);
@@ -48,9 +60,7 @@ public class Test {
             System.out.printf("Color : %s %n", tcs3200.getColor());
             Thread.sleep(2000);
         }
-    //}
     
-    //public static void removed() throws Exception {
         //tools.MemCache mCache = new MemCache();
         /*tcs3200.setFrequency(1);
         System.out.printf("Red : %.2f prct %n", (double) (tcs3200.getRed() / 10.0));
