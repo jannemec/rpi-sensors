@@ -1,7 +1,7 @@
 /*
  * Rain sensor module
  */
-package sensors;
+package com.jannemec.sensors;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
@@ -17,14 +17,14 @@ public class RainSBX extends Sensor {
     
     protected Pin GPIOSensor;
     
-    public RainSBX(tools.Cache cache, Pin GPIOSensor) {
+    public RainSBX(com.jannemec.tools.Cache cache, Pin GPIOSensor) {
         super(cache);
         this.setGPIOSensor(GPIOSensor);
         this.setSensorName("RainSBX");
         this.setValueList(new ArrayList<>(Arrays.asList("isRain")));
     }
     
-    public RainSBX(tools.Cache cache) {
+    public RainSBX(com.jannemec.tools.Cache cache) {
         this(cache, RaspiPin.GPIO_27);
     }
     

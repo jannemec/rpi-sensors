@@ -1,7 +1,7 @@
 /*
  * Light sensor module
  */
-package sensors;
+package com.jannemec.sensors;
 
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
@@ -11,14 +11,14 @@ import java.util.Arrays;
 
 public class TSL2561 extends Sensor {
     
-    public TSL2561(tools.Cache cache, int address) {
+    public TSL2561(com.jannemec.tools.Cache cache, int address) {
         super(cache);
         this.setAddress(address);
         this.setSensorName("TSL2561");
         this.setValueList(new ArrayList<>(Arrays.asList("infrared", "visible", "full")));
     }
     
-    public TSL2561(tools.Cache cache) {
+    public TSL2561(com.jannemec.tools.Cache cache) {
         this(cache, 0x39);
     }
     

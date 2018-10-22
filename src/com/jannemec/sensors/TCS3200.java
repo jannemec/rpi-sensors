@@ -1,7 +1,7 @@
 /*
  * Light sensor module
  */
-package sensors;
+package com.jannemec.sensors;
 
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
@@ -27,7 +27,7 @@ public class TCS3200 extends Sensor {
         this.intervalLength = intervalLength;
     }
     
-    public TCS3200(tools.Cache cache, Pin s1, Pin s2, Pin s3, Pin s4, Pin oe, Pin out) {
+    public TCS3200(com.jannemec.tools.Cache cache, Pin s1, Pin s2, Pin s3, Pin s4, Pin oe, Pin out) {
         super(cache);
         this.setAddress(address);
         this.setSensorName("TCS3200W");
@@ -40,7 +40,7 @@ public class TCS3200 extends Sensor {
         this.out = out;
     }
     
-    public TCS3200(tools.Cache cache) {
+    public TCS3200(com.jannemec.tools.Cache cache) {
         this(cache, RaspiPin.GPIO_02, RaspiPin.GPIO_03, RaspiPin.GPIO_04, RaspiPin.GPIO_05, RaspiPin.GPIO_07, RaspiPin.GPIO_06);
     }
     

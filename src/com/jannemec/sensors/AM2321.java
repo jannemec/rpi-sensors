@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sensors;
+package com.jannemec.sensors;
 
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
@@ -14,14 +14,14 @@ import java.util.Arrays;
 
 public class AM2321 extends Sensor {
     
-    public AM2321(tools.Cache cache, int address) {
+    public AM2321(com.jannemec.tools.Cache cache, int address) {
         super(cache);
         this.setAddress(address);
         this.setSensorName("AM2321");
         this.setValueList(new ArrayList<>(Arrays.asList("temperature", "humidity")));
     }
     
-    public AM2321(tools.Cache cache) {
+    public AM2321(com.jannemec.tools.Cache cache) {
         this(cache, 0x5c);
     }
     

@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tst;
+package com.jannemec.tst;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
-import sensors.BMP180;
-import sensors.AM2321;
-import sensors.TSL2561;
-import sensors.TCS3200;
-import sensors.HCSR04;
-import sensors.RainSBX;
-import tools.MemCache;
+import com.jannemec.sensors.BMP180;
+import com.jannemec.sensors.AM2321;
+import com.jannemec.sensors.TSL2561;
+import com.jannemec.sensors.TCS3200;
+import com.jannemec.sensors.HCSR04;
+import com.jannemec.sensors.RainSBX;
+import com.jannemec.tools.MemCache;
 
 
 // To run
 // cd Dokumenty/rpi/sensors
-// java -cp Sensors.jar tst.Test
-// java -cp Dokumenty/rpi/sensors/Sensors.jar tst.Test
+// java -cp Sensors.jar com.jannemec.tst.Test
+// java -cp ~/Dokumenty/rpi/sensors/Sensors.jar com.jannemec.tst.Test
 /**
  *
  * @author u935
@@ -30,7 +30,7 @@ import tools.MemCache;
 public class Test {
 
     public static void main(String args[]) throws Exception {
-        tools.MemCache mCache = new MemCache();
+        com.jannemec.tools.MemCache mCache = new MemCache();
         
         RainSBX rainSBX = new RainSBX(mCache);
         for(int i = 0; i < 2; i++) {
@@ -41,7 +41,7 @@ public class Test {
     }
     
     public static void removed() throws Exception {
-        tools.MemCache mCache = new MemCache();
+        com.jannemec.tools.MemCache mCache = new MemCache();
         
         HCSR04 hcsr04 = new HCSR04(mCache);
         for(int i = 0; i < 2; i++) {

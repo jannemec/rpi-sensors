@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sensors;
+package com.jannemec.sensors;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 abstract public class Sensor {
     
-    protected tools.Cache cache;
+    protected com.jannemec.tools.Cache cache;
     protected String sensorName = "SENSOR";
     protected int address;
     protected ArrayList<String> valueList;
@@ -23,11 +23,11 @@ abstract public class Sensor {
     //public abstract void setValue(String name, double d);
     public abstract String getSValue(String name) throws Exception;
     
-    public void setCache(tools.Cache cache) {
+    public void setCache(com.jannemec.tools.Cache cache) {
         this.cache = cache;
     }
     
-    public tools.Cache getCache() {
+    public com.jannemec.tools.Cache getCache() {
         return(this.cache);
     }
     
@@ -35,7 +35,7 @@ abstract public class Sensor {
         return(this.getSensorName() + "_" + name);
     }
     
-    public Sensor(tools.Cache cache) {
+    public Sensor(com.jannemec.tools.Cache cache) {
         this.setCache(cache);
     }
     

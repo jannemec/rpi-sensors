@@ -1,7 +1,7 @@
 /*
  * Distance sensor module
  */
-package sensors;
+package com.jannemec.sensors;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
@@ -18,7 +18,7 @@ public class HCSR04 extends Sensor {
     protected Pin GPIOTrig;
     protected Pin GPIOEcho;
     
-    public HCSR04(tools.Cache cache, Pin GPIOTrig, Pin GPIOEcho) {
+    public HCSR04(com.jannemec.tools.Cache cache, Pin GPIOTrig, Pin GPIOEcho) {
         super(cache);
         this.setGPIOTrig(GPIOTrig);
         this.setGPIOEcho(GPIOEcho);
@@ -26,7 +26,7 @@ public class HCSR04 extends Sensor {
         this.setValueList(new ArrayList<>(Arrays.asList("distance")));
     }
     
-    public HCSR04(tools.Cache cache) {
+    public HCSR04(com.jannemec.tools.Cache cache) {
         this(cache, RaspiPin.GPIO_28, RaspiPin.GPIO_29);
     }
     

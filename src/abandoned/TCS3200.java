@@ -15,7 +15,7 @@ import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import java.util.ArrayList;
 import java.util.Arrays;
-import sensors.Sensor;
+import com.jannemec.sensors.Sensor;
 
 public class TCS3200 extends Sensor {
 
@@ -33,7 +33,7 @@ public class TCS3200 extends Sensor {
         this.intervalLength = intervalLength;
     }
     
-    public TCS3200(tools.Cache cache, Pin s1, Pin s2, Pin s3, Pin s4, Pin oe, Pin out) {
+    public TCS3200(com.jannemec.tools.Cache cache, Pin s1, Pin s2, Pin s3, Pin s4, Pin oe, Pin out) {
         super(cache);
         this.setAddress(address);
         this.setSensorName("TCS3200");
@@ -46,7 +46,7 @@ public class TCS3200 extends Sensor {
         this.out = out;
     }
     
-    public TCS3200(tools.Cache cache) {
+    public TCS3200(com.jannemec.tools.Cache cache) {
         //this(cache, null, null, RaspiPin.GPIO_04, RaspiPin.GPIO_05, null, RaspiPin.GPIO_06);
         this(cache, RaspiPin.GPIO_02, RaspiPin.GPIO_03, RaspiPin.GPIO_04, RaspiPin.GPIO_05, null, RaspiPin.GPIO_01);
     }
