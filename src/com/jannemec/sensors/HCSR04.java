@@ -51,7 +51,7 @@ public class HCSR04 extends Sensor {
                 long endTime= System.nanoTime(); // Store the echo pin HIGH end time to calculate ECHO pin HIGH time.
 
                 double distance = ((((double) (endTime-startTime))/1000000000 * 343)/2);
-                gpio.shutdown();
+                /*gpio.shutdown();*/
                 gpio.unprovisionPin(sensorTriggerPin);
                 gpio.unprovisionPin(sensorEchoPin);
                 this.getCache().setDValue(this.getCacheCode("distance"), distance);

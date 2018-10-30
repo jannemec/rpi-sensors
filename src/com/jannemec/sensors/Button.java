@@ -17,19 +17,19 @@ import java.util.Arrays;
 import java.util.Date;
 import com.jannemec.tools.ActionListener;
 
-public class RainSBX extends Sensor {
+public class Button extends Sensor {
     
     protected Pin GPIOSensor;
     
-    public RainSBX(com.jannemec.tools.Cache cache, Pin GPIOSensor) {
+    public Button(com.jannemec.tools.Cache cache, Pin GPIOSensor) {
         super(cache);
         this.setGPIOSensor(GPIOSensor);
-        this.setSensorName("RainSBX");
-        this.setValueList(new ArrayList<>(Arrays.asList("isRain")));
+        this.setSensorName("Button");
+        this.setValueList(new ArrayList<>(Arrays.asList("isOn")));
     }
     
-    public RainSBX(com.jannemec.tools.Cache cache) {
-        this(cache, RaspiPin.GPIO_27);
+    public Button(com.jannemec.tools.Cache cache) {
+        this(cache, RaspiPin.GPIO_23);
     }
     
     @Override
@@ -41,11 +41,11 @@ public class RainSBX extends Sensor {
                 // Check if the value is in cache
                 if (!this.getCache().hasIValue(this.getCacheCode(name))) {
                     GpioController gpio = GpioFactory.getInstance();
-                    GpioPinDigitalInput sensorGPIOSensor = gpio.provisionDigitalInputPin(this.getGPIOSensor(),PinPullResistance.PULL_UP); // GPIOSensor pin as INPUT
-                    int isRain = sensorGPIOSensor.isHigh() ? 0 : 1;
+                    GpioPinDigitalInput sensorGPIOSensor = gpio.provisionDigitalInputPin(this.getGPIOSensor(),PinPullResistance.PULL_DOWN); // GPIOSensor pin as INPUT
+                    int isMovement = sensorGPIOSensor.isHigh() ? 0 : 1;
                     //gpio.shutdown();
                     gpio.unprovisionPin(sensorGPIOSensor);
-                    this.getCache().setIValue(this.getCacheCode("isRain"), isRain);
+                    this.getCache().setIValue(this.getCacheCode("isOn"), isMovement);
                 }
                 return(this.getCache().getIValue(this.getCacheCode(name)));
             } else {
@@ -101,7 +101,9 @@ public class RainSBX extends Sensor {
                 @Override
                 public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
                     // display pin state on console
-                    setLastChangeDate();
+                    if (event.getState().isHigh()) {
+                        setLastChangeDate();
+                    }
                     setLastStatus(event.getState().isHigh());
                     if (!(actionListener == null)) {
                         actionListener.handleAction(mySelf);
@@ -131,12 +133,12 @@ public class RainSBX extends Sensor {
         return(this.interuptMode);
     }
     
-    public boolean isRain() throws Exception {
-        return(this.getIValue("isRain") == 1);
+    public boolean isOn() throws Exception {
+        return(this.getIValue("isOn") == 1);
     }
     
-    public int getIsRain() throws Exception {
-        return(this.getIValue("isRain"));
+    public int getIsOn() throws Exception {
+        return(this.getIValue("isOn"));
     }
     
     @Override

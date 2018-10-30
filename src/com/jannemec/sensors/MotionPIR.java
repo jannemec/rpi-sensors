@@ -17,19 +17,19 @@ import java.util.Arrays;
 import java.util.Date;
 import com.jannemec.tools.ActionListener;
 
-public class RainSBX extends Sensor {
+public class MotionPIR extends Sensor {
     
     protected Pin GPIOSensor;
     
-    public RainSBX(com.jannemec.tools.Cache cache, Pin GPIOSensor) {
+    public MotionPIR(com.jannemec.tools.Cache cache, Pin GPIOSensor) {
         super(cache);
         this.setGPIOSensor(GPIOSensor);
-        this.setSensorName("RainSBX");
-        this.setValueList(new ArrayList<>(Arrays.asList("isRain")));
+        this.setSensorName("MotionPIR");
+        this.setValueList(new ArrayList<>(Arrays.asList("isMovement")));
     }
     
-    public RainSBX(com.jannemec.tools.Cache cache) {
-        this(cache, RaspiPin.GPIO_27);
+    public MotionPIR(com.jannemec.tools.Cache cache) {
+        this(cache, RaspiPin.GPIO_26);
     }
     
     @Override
@@ -42,10 +42,10 @@ public class RainSBX extends Sensor {
                 if (!this.getCache().hasIValue(this.getCacheCode(name))) {
                     GpioController gpio = GpioFactory.getInstance();
                     GpioPinDigitalInput sensorGPIOSensor = gpio.provisionDigitalInputPin(this.getGPIOSensor(),PinPullResistance.PULL_UP); // GPIOSensor pin as INPUT
-                    int isRain = sensorGPIOSensor.isHigh() ? 0 : 1;
+                    int isMovement = sensorGPIOSensor.isHigh() ? 0 : 1;
                     //gpio.shutdown();
                     gpio.unprovisionPin(sensorGPIOSensor);
-                    this.getCache().setIValue(this.getCacheCode("isRain"), isRain);
+                    this.getCache().setIValue(this.getCacheCode("isMovement"), isMovement);
                 }
                 return(this.getCache().getIValue(this.getCacheCode(name)));
             } else {
@@ -101,7 +101,9 @@ public class RainSBX extends Sensor {
                 @Override
                 public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
                     // display pin state on console
-                    setLastChangeDate();
+                    if (event.getState().isHigh()) {
+                        setLastChangeDate();
+                    }
                     setLastStatus(event.getState().isHigh());
                     if (!(actionListener == null)) {
                         actionListener.handleAction(mySelf);
@@ -131,12 +133,12 @@ public class RainSBX extends Sensor {
         return(this.interuptMode);
     }
     
-    public boolean isRain() throws Exception {
-        return(this.getIValue("isRain") == 1);
+    public boolean isMovement() throws Exception {
+        return(this.getIValue("isMovement") == 1);
     }
     
-    public int getIsRain() throws Exception {
-        return(this.getIValue("isRain"));
+    public int getIsMovement() throws Exception {
+        return(this.getIValue("isMovement"));
     }
     
     @Override
