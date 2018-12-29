@@ -62,7 +62,7 @@ public class MemCache implements Cache {
     }
     
     @Override
-    public double getDValue(String key) {
+    public double getDValue(String key) throws IllegalArgumentException {
         if (this.hasDValue(key)) {
             DoubleCache v = this.dmap.get(key);
             if (this.isValid(v.validTo)) {
@@ -104,7 +104,7 @@ public class MemCache implements Cache {
     }
     
     @Override
-    public int getIValue(String key) {
+    public int getIValue(String key) throws IllegalArgumentException {
         if (this.hasIValue(key)) {
             IntCache v = this.imap.get(key);
             if (this.isValid(v.validTo)) {
@@ -146,7 +146,7 @@ public class MemCache implements Cache {
     }
     
     @Override
-    public String getSValue(String key) {
+    public String getSValue(String key) throws IllegalArgumentException {
         if (this.hasSValue(key)) {
             StringCache v = this.smap.get(key);
             if (this.isValid(v.validTo)) {

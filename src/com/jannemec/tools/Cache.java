@@ -16,7 +16,7 @@ public interface Cache {
      * @param key String
      * @return double
      */
-    public double  getDValue(String key);
+    public double  getDValue(String key) throws IllegalArgumentException;
     
     /**
      * Sets the double value to cache
@@ -43,7 +43,7 @@ public interface Cache {
      * @param key String
      * @return int
      */
-    public int     getIValue(String key);
+    public int     getIValue(String key) throws IllegalArgumentException;
     
     /**
      * Sets the int value to cache
@@ -70,7 +70,7 @@ public interface Cache {
      * @param key String
      * @return String
      */
-    public String  getSValue(String key);
+    public String  getSValue(String key) throws IllegalArgumentException;
     
     /**
      * Sets the String value to cache
